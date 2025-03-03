@@ -33,5 +33,6 @@
             </ee:variables>
         </ee:transform>
 		<flow-ref doc:name="get-tickets-data-by-bid" doc:id="282afc31-6575-4728-b0e3-eb0f20fd7a3c" name="get-tickets-data-by-bid"/>
+		<logger level="INFO" doc:name="Logger" doc:id="b79020cf-02ed-48cd-8103-a07722654f43" message="#[output application/json&#10;---&#10;{&#10;	port: Mule::p('api.port') default &quot;&quot;,&#10;	spec: Mule::p('api.specification') default &quot;&quot;,&#10;	groupId: Mule::p('api.groupId') default &quot;&quot;&#10;}]"/>
     </flow>
 </mule>

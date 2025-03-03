@@ -2,71 +2,120 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
+	<parent>
+		<groupId>d276675b-c310-4c9c-adf3-3f8ee2940a57</groupId>
+		<artifactId>parent-pom</artifactId>
+		<version>1.0.0</version>
+		<relativePath>../parent-pom/pom.xml</relativePath>
+	</parent>
+
 	<groupId>com.mycompany</groupId>
 	<artifactId>super-ticket-papi</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<packaging>mule-application</packaging>
 
 	<name>super-ticket-papi</name>
 
 	<properties>
+		<!-- (1) Esto se elimina del principal, va en el parent-pom 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
 		<app.runtime>4.9.1</app.runtime>
-		<mule.maven.plugin.version>4.3.0</mule.maven.plugin.version>
+		<mule.maven.plugin.version>4.3.0</mule.maven.plugin.version> -->
+
+		<!-- (2) Esto se queda en el POM -->
+		<api.groupId>d276675b-c310-4c9c-adf3-3f8ee2940a57</api.groupId>
+		<api.artifactId>super-ticket-papi-spec</api.artifactId>
+		<api.version>1.0.0</api.version>
 	</properties>
 
 	<build>
+		<!-- (3) En el parent-pom se agrega una etiqueta nueva -->
+		<!-- pluginManagement -->
 		<plugins>
+			<!-- (4) El Plugin a continuacion se elimina por completo y queda en el parent-pom -->
+			<!--plugin> 			
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.2.0</version>
+				<configuration>
+					<resources>
+						<resource>
+							<directory>src/main/resources</directory>
+							<filtering>false</filtering>
+						</resource>
+						<resource>
+							<directory>src/main/resources</directory>
+							<filtering>true</filtering>
+							<includes>
+								<include>properties.yaml</include>
+							</includes>
+						</resource>
+					</resources>
+
+					//<nonFilteredFileExtensions> <nonFilteredFileExtension>.yaml</nonFilteredFileExtension> 
+					//</nonFilteredFileExtensions> 
+				</configuration>
+			</plugin>-->
+
+			<!-- (5) Se elimina los Version de los plugins siguientes en el POM-->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-clean-plugin</artifactId>
-				<version>3.2.0</version>
+				<!--version>3.2.0</version-->
 			</plugin>
 			<plugin>
 				<groupId>org.mule.tools.maven</groupId>
 				<artifactId>mule-maven-plugin</artifactId>
-				<version>${mule.maven.plugin.version}</version>
+				<!--version>${mule.maven.plugin.version}</version-->
 				<extensions>true</extensions>
+				<version>4.3.0</version>
 			</plugin>
 		</plugins>
 	</build>
 
+	<!-- (6) En el parent-pom se agrega una nueva etiqueta -->
+	<!-- dependencyManagement -->
+	<!-- (7) Se elimina los Version de las dependencias siguientes en el POM-->
 	<dependencies>
 		<dependency>
 			<groupId>org.mule.connectors</groupId>
 			<artifactId>mule-http-connector</artifactId>
-			<version>1.10.3</version>
+			<!--version>1.10.3</version-->
 			<classifier>mule-plugin</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.mule.connectors</groupId>
 			<artifactId>mule-sockets-connector</artifactId>
-			<version>1.2.5</version>
+			<!--version>1.2.5</version-->
 			<classifier>mule-plugin</classifier>
 		</dependency>
 		<dependency>
-			<groupId>d276675b-c310-4c9c-adf3-3f8ee2940a57</groupId>
-			<artifactId>super-ticket-papi-spec</artifactId>
-			<version>1.0.0</version>
+			<!-- (9) esta dependencia del RAML u OAS se elimina del parent-pom-->
+			<!-- (10) y se queda en el pom con su version-->
+			<groupId>${api.groupId}</groupId>
+			<artifactId>${api.artifactId}</artifactId>
+			<version>${api.version}</version>
 			<classifier>oas</classifier>
 			<type>zip</type>
 		</dependency>
 		<dependency>
 			<groupId>org.mule.modules</groupId>
 			<artifactId>mule-apikit-module</artifactId>
-			<version>1.11.4</version>
+			<!--version>1.11.4</version-->
 			<classifier>mule-plugin</classifier>
 		</dependency>
 		<dependency>
 			<groupId>com.mulesoft.modules</groupId>
 			<artifactId>mule-secure-configuration-property-module</artifactId>
-			<version>1.2.7</version>
+			<!--version>1.2.7</version-->
 			<classifier>mule-plugin</classifier>
 		</dependency>
 	</dependencies>
 
+	<!-- (8) Se elimina los repositorios en el POM y quedan en el parent-pom -->
+	<!--
 	<repositories>
 		<repository>
 			<id>anypoint-exchange-v3</id>
@@ -93,5 +142,14 @@
 			</snapshots>
 		</pluginRepository>
 	</pluginRepositories>
+	-->
 
+	<repositories>
+		<repository>
+			<id>anypoint-exchange-v3</id>
+			<name>Anypoint Exchange V3</name>
+			<url>https://maven.anypoint.mulesoft.com/api/v3/maven</url>
+			<layout>default</layout>
+		</repository>
+	</repositories>
 </project>
