@@ -15,10 +15,36 @@
 
 		<app.runtime>4.9.1</app.runtime>
 		<mule.maven.plugin.version>4.3.0</mule.maven.plugin.version>
+
+		<api.groupId>d276675b-c310-4c9c-adf3-3f8ee2940a57</api.groupId>
+		<api.artifactId>super-ticket-papi-spec</api.artifactId>
+		<api.version>1.0.0</api.version>
 	</properties>
 
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.2.0</version>
+				<configuration>
+					<resources>
+						<resource>
+							<directory>src/main/resources</directory>
+							<filtering>false</filtering>
+						</resource>
+						<resource>
+							<directory>src/main/resources</directory>
+							<filtering>true</filtering>
+							<includes>
+								<include>properties.yaml</include>
+							</includes>
+						</resource>
+					</resources>
+					<!-- <nonFilteredFileExtensions> <nonFilteredFileExtension>.yaml</nonFilteredFileExtension> 
+						</nonFilteredFileExtensions> -->
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-clean-plugin</artifactId>
@@ -47,9 +73,9 @@
 			<classifier>mule-plugin</classifier>
 		</dependency>
 		<dependency>
-			<groupId>d276675b-c310-4c9c-adf3-3f8ee2940a57</groupId>
-			<artifactId>super-ticket-papi-spec</artifactId>
-			<version>1.0.0</version>
+			<groupId>${api.groupId}</groupId>
+			<artifactId>${api.artifactId}</artifactId>
+			<version>${api.version}</version>
 			<classifier>oas</classifier>
 			<type>zip</type>
 		</dependency>
