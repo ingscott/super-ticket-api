@@ -1,0 +1,4 @@
+tls: #Recomendado usar uno por ambiente
+  keystore:
+    keyPassword: "![KCyFyi9rvi0/bS4Jqd1XG9SoyjmF9Kcx]"
+    password: "![KCyFyi9rvi0/bS4Jqd1XG9SoyjmF9Kcx]"

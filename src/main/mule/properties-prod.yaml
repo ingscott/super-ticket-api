@@ -1,0 +1,10 @@
+api:
+  port: "8082"
+  id: "20232759"
+  version: "1.0.0"
+  
+tls: #Recomendado usar uno por ambiente
+  keystore:
+    type: "pkcs12"
+    path: "certs/super-tickets-papi.p12"
+    alias: "mule-server"

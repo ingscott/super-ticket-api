@@ -1,0 +1,8 @@
+api:
+  port: "8082"
+  id: "20234176"
+  majorVersion: "v1"
+  version: "${api.version}"
+  artifactId: "${api.artifactId}"
+  groupId: "${api.groupId}"
+  specification: "resource::${api.groupId}:super-ticket-papi-spec:${api.version}:oas:zip:super-ticket-papi.yaml"
